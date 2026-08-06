@@ -1,0 +1,1 @@
+Interactive Python 8-puzzle application using optimal A* search with Manhattan distance, solvability validation, non-blocking solving, animation and automated tests.
