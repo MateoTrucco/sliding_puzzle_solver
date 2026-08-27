@@ -24,3 +24,24 @@ From this folder:
 ```bash
 python -m pytest tests
 ```
+
+---
+
+## Live demo
+
+**[Open the live demo](https://mateotrucco.github.io/sliding_puzzle_solver/)**
+
+The demo runs the repository’s original Python logic directly in the browser with Pyodide 314.0.4. The desktop Tkinter interface remains available through `main.py`.
+
+## Repository setup
+
+This separated repository also includes:
+
+- MIT license
+- project-specific `.gitignore`
+- automated tests / CI
+- GitHub Pages deployment for the demo
+- `screenshots/` placeholder for portfolio images
+
+The source files from the cleaned portfolio base were preserved unless a web-demo integration file had to be added.
+

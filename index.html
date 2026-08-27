@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="An 8-puzzle solver built in Python with solvability validation, Manhattan-distance A* search and tested move logic. The web demo runs the original solver through Pyodide.">
+  <title>Sliding Puzzle Solver — Live Demo</title>
+  <link rel="stylesheet" href="web_demo/demo.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v314.0.4/full/pyodide.js"></script>
+  
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">Mateo Trucco · Live Demo</div>
+      <nav class="links">
+        <a class="btn" href="https://github.com/MateoTrucco/sliding_puzzle_solver" target="_blank" rel="noreferrer">Source ↗</a>
+        <a class="btn" href="https://mateotrucco.github.io/">Portfolio</a>
+      </nav>
+    </header>
+    <section class="hero">
+      <div class="card">
+        <p class="eyebrow">Featured · Python · A* algorithm</p>
+        <h1>Sliding Puzzle Solver</h1>
+        <p class="muted">An 8-puzzle solver built in Python with solvability validation, Manhattan-distance A* search and tested move logic. The web demo runs the original solver through Pyodide.</p>
+      </div>
+      <aside class="card">
+        <span class="badge">DEMO</span>
+        <h2 style="margin-top:12px">Try it here</h2>
+        <p class="muted">This page is intentionally scoped as a portfolio demo. See the repository README for the full desktop/backend scope and limitations.</p>
+      </aside>
+    </section>
+    <section class="grid"><div class="card"><h2>Board</h2><div class="board" id="board"></div><div class="actions"><button id="shuffle">Shuffle</button><button class="primary" id="solve">Solve with A*</button><button id="reset">Reset</button></div><p class="status" data-runtime-status>Preparing Python runtime…</p></div><div class="card"><h2>Solver output</h2><div class="output" id="output">Loading…</div><div class="actions"><button id="animate" disabled>Animate solution</button></div></div></section>
+    <footer class="footer">Demo site for <code>sliding_puzzle_solver</code>. Source and tests live in the repository.</footer>
+  </main>
+  <script type="module" src="web_demo/demo.js"></script>
+</body>
+</html>

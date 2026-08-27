@@ -1,1 +1,1 @@
-Interactive Python 8-puzzle application using optimal A* search with Manhattan distance, solvability validation, non-blocking solving, animation and automated tests.
+An 8-puzzle solver built in Python with solvability validation, Manhattan-distance A* search and tested move logic. The web demo runs the original solver through Pyodide.

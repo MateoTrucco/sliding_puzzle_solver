@@ -1,37 +1,29 @@
 # Python
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
 .pytest_cache/
 .coverage
 htmlcov/
-
-# Virtual environments
 .venv/
 venv/
 env/
 
-# Packaging
+# Local configuration / secrets
+.env
+.env.*
+!.env.example
+*.sqlite3
+
+# Build output
 build/
 dist/
-*.egg-info/
 *.spec
 
-# Editors and OS
+# Editors / OS
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
 
-# Local data and secrets
-.env
-.env.*
-!.env.example
-*.sqlite3
-*.db
-*.log
-
-# Generated output
-output/
-exports/
+# Demo tooling
+node_modules/

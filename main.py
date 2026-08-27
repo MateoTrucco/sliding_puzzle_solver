@@ -6,8 +6,9 @@ import random
 import threading
 import time
 import tkinter as tk
-from ui_helpers import c, enable_high_dpi
-from solver import GOAL, Board, Move, SolveResult, apply_move, neighbors, solve  # noqa: E402
+
+from base_functions import c, enable_high_dpi
+from solver import GOAL, Board, Move, SolveResult, apply_move, neighbors, solve
 
 
 class PuzzleApp:
