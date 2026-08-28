@@ -4,15 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="An 8-puzzle solver built in Python with solvability validation, Manhattan-distance A* search and tested move logic. The web demo runs the original solver through Pyodide.">
-  <title>Sliding Puzzle Solver — Live Demo</title>
+  <title>Sliding Puzzle Solver — Interactive Lab</title>
   <link rel="stylesheet" href="web_demo/demo.css">
+  <link rel="stylesheet" href="web_demo/shell.css">
   <script src="https://cdn.jsdelivr.net/pyodide/v314.0.4/full/pyodide.js"></script>
   
 </head>
 <body>
   <main class="shell">
     <header class="topbar">
-      <div class="brand">Mateo Trucco · Live Demo</div>
+      <div class="brand">Mateo Trucco · Project Lab</div>
       <nav class="links">
         <a class="btn" href="https://github.com/MateoTrucco/sliding_puzzle_solver" target="_blank" rel="noreferrer">Source ↗</a>
         <a class="btn" href="https://mateotrucco.github.io/">Portfolio</a>
@@ -25,14 +26,15 @@
         <p class="muted">An 8-puzzle solver built in Python with solvability validation, Manhattan-distance A* search and tested move logic. The web demo runs the original solver through Pyodide.</p>
       </div>
       <aside class="card">
-        <span class="badge">DEMO</span>
-        <h2 style="margin-top:12px">Try it here</h2>
-        <p class="muted">This page is intentionally scoped as a portfolio demo. See the repository README for the full desktop/backend scope and limitations.</p>
+        <span class="badge">INTERACTIVE LAB</span>
+        <h2 style="margin-top:12px">Explore the workflow</h2>
+        <p class="muted">Use the interactive workspace below to exercise the project's core logic. Source, tests and setup instructions are available in the repository.</p>
       </aside>
     </section>
-    <section class="grid"><div class="card"><h2>Board</h2><div class="board" id="board"></div><div class="actions"><button id="shuffle">Shuffle</button><button class="primary" id="solve">Solve with A*</button><button id="reset">Reset</button></div><p class="status" data-runtime-status>Preparing Python runtime…</p></div><div class="card"><h2>Solver output</h2><div class="output" id="output">Loading…</div><div class="actions"><button id="animate" disabled>Animate solution</button></div></div></section>
-    <footer class="footer">Demo site for <code>sliding_puzzle_solver</code>. Source and tests live in the repository.</footer>
+    <section class="grid"><div class="card"><h2>Interactive board</h2><p class="muted">Move tiles manually or generate a solvable board at the selected depth.</p><div class="board" id="board"></div><div class="field"><label for="difficulty">Shuffle depth</label><select id="difficulty"><option value="12">Easy · 12 moves</option><option value="28" selected>Medium · 28 moves</option><option value="60">Hard · 60 moves</option></select></div><div class="actions"><button id="shuffle">Shuffle</button><button class="primary" id="solve">Solve with A*</button><button id="reset">Reset</button></div><p class="status" data-runtime-status>Preparing Python runtime…</p></div><div class="card"><h2>Solver analysis</h2><div class="metric-grid" id="solverMetrics"></div><div class="output" id="output">Loading…</div><div class="actions"><button id="animate" disabled>Animate solution</button><button id="step" disabled>Apply next step</button></div></div></section>
+    <footer class="footer">Interactive browser build for <code>sliding_puzzle_solver</code> · source and tests live in the repository.</footer>
   </main>
-  <script type="module" src="web_demo/demo.js"></script>
+  <script type="module" src="web_demo/shell.js"></script>
+  <script type="module" src="web_demo/solver-ui.js"></script>
 </body>
 </html>
