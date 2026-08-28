@@ -21,14 +21,14 @@
     </header>
     <section class="hero">
       <div class="card">
-        <p class="eyebrow">Featured · Python · A* algorithm</p>
+        <p class="eyebrow" data-en="Featured · Python · A* algorithm" data-es="Destacado · Python · Algoritmo A*">Featured · Python · A* algorithm</p>
         <h1>Sliding Puzzle Solver</h1>
-        <p class="muted">An 8-puzzle solver built in Python with solvability validation, Manhattan-distance A* search and tested move logic. The web demo runs the original solver through Pyodide.</p>
+        <p class="muted" data-en="An 8-puzzle solver built in Python with solvability validation, Manhattan-distance A* search and tested move logic. The web demo runs the original solver through Pyodide." data-es="Un solver del 8-puzzle en Python con validación, búsqueda A* con distancia Manhattan y movimientos testeados. La demo ejecuta el solver original mediante Pyodide.">An 8-puzzle solver built in Python with solvability validation, Manhattan-distance A* search and tested move logic. The web demo runs the original solver through Pyodide.</p>
       </div>
       <aside class="card">
         <span class="badge">INTERACTIVE LAB</span>
         <h2 style="margin-top:12px">Explore the workflow</h2>
-        <p class="muted">Use the interactive workspace below to exercise the project's core logic. Source, tests and setup instructions are available in the repository.</p>
+        <p class="muted" data-en="Shuffle, solve and replay an optimal path using the repository's real Python engine." data-es="Mezclá, resolvé y reproducí una ruta óptima con el motor Python real del repositorio.">Shuffle, solve and replay an optimal path using the repository's real Python engine.</p>
       </aside>
     </section>
     <section class="grid"><div class="card"><h2>Interactive board</h2><p class="muted">Move tiles manually or generate a solvable board at the selected depth.</p><div class="board" id="board"></div><div class="field"><label for="difficulty">Shuffle depth</label><select id="difficulty"><option value="12">Easy · 12 moves</option><option value="28" selected>Medium · 28 moves</option><option value="60">Hard · 60 moves</option></select></div><div class="actions"><button id="shuffle">Shuffle</button><button class="primary" id="solve">Solve with A*</button><button id="reset">Reset</button></div><p class="status" data-runtime-status>Preparing Python runtime…</p></div><div class="card"><h2>Solver analysis</h2><div class="metric-grid" id="solverMetrics"></div><div class="output" id="output">Loading…</div><div class="actions"><button id="animate" disabled>Animate solution</button><button id="step" disabled>Apply next step</button></div></div></section>

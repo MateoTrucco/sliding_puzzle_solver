@@ -9,6 +9,7 @@ import tkinter as tk
 
 from base_functions import c, enable_high_dpi
 from solver import GOAL, Board, Move, SolveResult, apply_move, neighbors, solve
+from ui_theme import apply_theme
 
 
 class PuzzleApp:
@@ -17,7 +18,7 @@ class PuzzleApp:
         self.root.title("Sliding Puzzle Solver")
         self.root.geometry("620x520")
         self.root.minsize(520, 470)
-        self.root.configure(bg=c["++"])
+        self.colors = apply_theme(root, "#2563eb")
         enable_high_dpi(root)
 
         self.board: Board = GOAL
@@ -35,24 +36,24 @@ class PuzzleApp:
             self.root,
             text="8-Puzzle A* Solver",
             font=("Segoe UI", 22, "bold"),
-            bg=c["++"],
-            fg=c["b"],
+            bg=self.colors["bg"],
+            fg=self.colors["ink"],
         )
         title.pack(pady=(18, 4))
         tk.Label(
             self.root,
             text="Move tiles yourself, shuffle a valid board, or let A* find the shortest path.",
             font=("Segoe UI", 10),
-            bg=c["++"],
-            fg="#4b5563",
+            bg=self.colors["bg"],
+            fg=self.colors["muted"],
         ).pack(pady=(0, 12))
 
-        body = tk.Frame(self.root, bg=c["++"])
+        body = tk.Frame(self.root, bg=self.colors["bg"])
         body.pack(fill="both", expand=True, padx=22, pady=8)
         body.columnconfigure(0, weight=1)
         body.columnconfigure(1, weight=1)
 
-        grid = tk.Frame(body, bg="#dbe3ec", bd=2, relief="ridge")
+        grid = tk.Frame(body, bg=self.colors["line"], bd=0, highlightthickness=0)
         grid.grid(row=0, column=0, rowspan=2, padx=(0, 18), sticky="nsew")
         for row in range(3):
             grid.rowconfigure(row, weight=1)
@@ -63,22 +64,22 @@ class PuzzleApp:
                 grid,
                 font=("Segoe UI", 24, "bold"),
                 command=lambda tile=index: self.move_tile(tile),
-                bd=1,
-                relief="raised",
+                bd=0,
+                relief="flat",
                 cursor="hand2",
             )
             button.grid(row=index // 3, column=index % 3, padx=4, pady=4, sticky="nsew")
             self.tile_buttons.append(button)
 
-        controls = tk.Frame(body, bg=c["++"])
+        controls = tk.Frame(body, bg=self.colors["bg"])
         controls.grid(row=0, column=1, sticky="new")
         controls.columnconfigure(0, weight=1)
 
-        self.solve_button = self._button(controls, "Solve", self.solve_async, c["g"])
-        self.step_button = self._button(controls, "Next step", self.step_solution, c["y"])
-        self.animate_button = self._button(controls, "Animate", self.animate_solution, c["blu"])
-        self.shuffle_button = self._button(controls, "Shuffle", lambda: self.shuffle(50), c["r"])
-        self.reset_button = self._button(controls, "Reset", self.reset, "#cbd5e1")
+        self.solve_button = self._button(controls, "Solve", self.solve_async, self.colors["accent"])
+        self.step_button = self._button(controls, "Next step", self.step_solution, "#f59e0b")
+        self.animate_button = self._button(controls, "Animate", self.animate_solution, "#0ea5e9")
+        self.shuffle_button = self._button(controls, "Shuffle", lambda: self.shuffle(50), "#7c3aed")
+        self.reset_button = self._button(controls, "Reset", self.reset, self.colors["soft"])
 
         self.status = tk.Label(
             body,
@@ -87,12 +88,14 @@ class PuzzleApp:
             anchor="nw",
             wraplength=250,
             font=("Segoe UI", 11),
-            bg="#ffffff",
-            fg=c["b"],
+            bg=self.colors["card"],
+            fg=self.colors["ink"],
             padx=14,
             pady=14,
-            bd=1,
-            relief="solid",
+            bd=0,
+            relief="flat",
+            highlightthickness=1,
+            highlightbackground=self.colors["line"],
         )
         self.status.grid(row=1, column=1, sticky="nsew", pady=(12, 0))
 
@@ -105,8 +108,8 @@ class PuzzleApp:
             command=command,
             font=("Segoe UI", 11, "bold"),
             bg=background,
-            fg="#111827",
-            activebackground="#ffffff",
+            fg="#ffffff" if background != self.colors["soft"] else self.colors["ink"],
+            activebackground=self.colors["card"],
             cursor="hand2",
             padx=10,
             pady=8,
@@ -118,9 +121,9 @@ class PuzzleApp:
         for index, value in enumerate(self.board):
             button = self.tile_buttons[index]
             if value == 0:
-                button.configure(text="", state="disabled", bg="#e5e7eb", relief="flat")
+                button.configure(text="", state="disabled", bg=self.colors["soft"], relief="flat")
             else:
-                button.configure(text=str(value), state="normal", bg="#ffffff", relief="raised")
+                button.configure(text=str(value), state="normal", bg=self.colors["card"], fg=self.colors["ink"], relief="flat")
 
     def _clear_solution(self) -> None:
         self.solution = ()

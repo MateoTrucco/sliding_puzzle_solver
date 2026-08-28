@@ -9,6 +9,8 @@ const out = document.querySelector('#output');
 const solveButton = document.querySelector('#solve');
 const animateButton = document.querySelector('#animate');
 const stepButton = document.querySelector('#step');
+let language = localStorage.getItem('mateo-ui-language') || (navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en');
+const t = (en, es) => language === 'es' ? es : en;
 
 function draw() {
   boardEl.innerHTML = board.map((value, index) => `<button type="button" class="tile ${value === 0 ? 'blank' : ''}" data-index="${index}" ${value === 0 ? 'disabled' : ''} aria-label="${value === 0 ? 'Empty space' : `Tile ${value}`}">${value || ''}</button>`).join('');
@@ -18,7 +20,7 @@ async function init() {
   py = await bootPython(['solver.py']);
   solveButton.disabled = false;
   draw();
-  out.textContent = 'Ready. Move a tile, shuffle the board or analyze the current state.';
+  out.textContent = t('Ready. Move a tile, shuffle the board or analyze the current state.','Listo. Mové una ficha, mezclá el tablero o analizá el estado actual.');
 }
 
 function neighbors(current) {
@@ -51,7 +53,7 @@ function shuffle() {
   stepButton.disabled = true;
   document.querySelector('#solverMetrics').innerHTML = '';
   draw();
-  out.textContent = `Solvable board generated with ${depth} valid random moves.`;
+  out.textContent = t(`Solvable board generated with ${depth} valid random moves.`,`Tablero resoluble generado con ${depth} movimientos aleatorios válidos.`);
 }
 
 function solve() {
@@ -60,8 +62,8 @@ function solve() {
   const raw = py.runPython(`import json\nfrom solver import solve\nr=solve(list(demo_board))\njson.dumps({'status':r.status,'moves':list(r.moves),'explored':r.explored,'message':r.message})`);
   const data = parsePythonJson(raw);
   moves = data.moves;
-  out.textContent = `${data.message}\nStatus: ${data.status}\nExplored states: ${data.explored}\nMoves: ${moves.join(' ') || '(none)'}`;
-  document.querySelector('#solverMetrics').innerHTML = `<div class="metric"><strong>${moves.length}</strong><small>Optimal moves</small></div><div class="metric"><strong>${data.explored}</strong><small>States explored</small></div><div class="metric"><strong>${manualMoves}</strong><small>Manual moves</small></div>`;
+  out.textContent = `${data.message}\n${t('Status','Estado')}: ${data.status}\n${t('Explored states','Estados explorados')}: ${data.explored}\n${t('Moves','Movimientos')}: ${moves.join(' ') || t('(none)','(ninguno)')}`;
+  document.querySelector('#solverMetrics').innerHTML = `<div class="metric"><strong>${moves.length}</strong><small>${t('Optimal moves','Movimientos óptimos')}</small></div><div class="metric"><strong>${data.explored}</strong><small>${t('States explored','Estados explorados')}</small></div><div class="metric"><strong>${manualMoves}</strong><small>${t('Manual moves','Movimientos manuales')}</small></div>`;
   animateButton.disabled = !moves.length;
   stepButton.disabled = !moves.length;
 }
@@ -84,7 +86,7 @@ async function animate() {
     applyNext();
     await new Promise((resolve) => setTimeout(resolve, 190));
   }
-  out.textContent += '\nAnimation complete.';
+  out.textContent += `\n${t('Animation complete.','Animación completa.')}`;
 }
 
 boardEl.addEventListener('click', (event) => {
@@ -100,7 +102,7 @@ boardEl.addEventListener('click', (event) => {
   animateButton.disabled = true;
   stepButton.disabled = true;
   draw();
-  out.textContent = `Manual move ${manualMoves}.`;
+  out.textContent = t(`Manual move ${manualMoves}.`,`Movimiento manual ${manualMoves}.`);
 });
 
 solveButton.disabled = true;
@@ -112,7 +114,7 @@ document.querySelector('#reset').addEventListener('click', () => {
   moves = [];
   manualMoves = 0;
   draw();
-  out.textContent = 'Reset to solved state.';
+  out.textContent = t('Reset to solved state.','Reiniciado al estado resuelto.');
   animateButton.disabled = true;
   stepButton.disabled = true;
   document.querySelector('#solverMetrics').innerHTML = '';
@@ -120,3 +122,4 @@ document.querySelector('#reset').addEventListener('click', () => {
 animateButton.addEventListener('click', animate);
 stepButton.addEventListener('click', applyNext);
 init().catch(() => {});
+document.addEventListener('mt:language', (event) => { language = event.detail.language; });
